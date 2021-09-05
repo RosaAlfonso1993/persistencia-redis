@@ -11,17 +11,22 @@ public class Stack {
     }
 
     public void push(int value) {
-        // TODO: Implement it!
+        connection.lpush(String.valueOf(connection),String.valueOf(value));
     }
 
     public int pop() {
-        // TODO: Implement it!
-        return -1;
+        if(isEmpty()){
+            throw new UnderflowException();
+        }
+        return Integer.parseInt(connection.lpop(String.valueOf(connection)));
     }
 
     public boolean isEmpty() {
-        // TODO: Implement it!
-        return false;
+        boolean empty = true;
+        if(connection.llen(String.valueOf(connection)) > 0){
+            empty = false;
+        }
+        return empty;
     }
 
     public static class UnderflowException extends RuntimeException {
